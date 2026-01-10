@@ -3,20 +3,34 @@
 package com.api.utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigManager {
 
-	// Program to read .properties file
-	public static String getProperty(String key) throws IOException {
+	
+	private static Properties prop = new Properties();
 
-		Properties prop = new Properties();
+	//Static block will execute only once
+	static {
 		File configFile = new File(
 				System.getProperty("user.dir") + "\\src\\test\\resources\\config\\config.properties");
-		FileReader fileReader = new FileReader(configFile);
-		prop.load(fileReader);
+		FileReader fileReader = null;
+		try {
+			fileReader = new FileReader(configFile);
+			prop.load(fileReader);
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	public static String getProperty(String key) {
 
 		return prop.getProperty("BASE_URI");
 	}
