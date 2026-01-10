@@ -10,7 +10,7 @@ import java.util.Properties;
 public class ConfigManager {
 
 	// Program to read .properties file
-	public String getProperty(String key) throws IOException {
+	public static String getProperty(String key) throws IOException {
 
 		Properties prop = new Properties();
 		File configFile = new File(

@@ -18,11 +18,10 @@ public class LoginAPITest {
 	@Test
 	public void loginAPITest() throws IOException {
 
-		ConfigManager configManager = new ConfigManager();
 		UserCredentials userCredentials = new UserCredentials("iamfd", "password");
 		
 		given()
-		 	.baseUri(configManager.getProperty("BASE_URI"))
+		 	.baseUri(ConfigManager.getProperty("BASE_URI"))
 		 	.contentType(ContentType.JSON)
 		 	.and()
 		 	.accept(ContentType.JSON)
