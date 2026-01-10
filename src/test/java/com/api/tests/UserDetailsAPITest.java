@@ -32,7 +32,7 @@ public class UserDetailsAPITest {
 			.log().all()
 			.statusCode(200)
 			.and()
-			.time(Matchers.lessThan(5000L))
+			.time(Matchers.lessThan(2500L))
 			.and()
 			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/UserDetailsResponseSchema.json"))
 			.extract().response();
