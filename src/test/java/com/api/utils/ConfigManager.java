@@ -10,13 +10,12 @@ import java.util.Properties;
 
 public class ConfigManager {
 
-	
 	private static Properties prop = new Properties();
 
-	//Static block will execute only once
+	// Static block will execute only once
 	static {
-		File configFile = new File(
-				System.getProperty("user.dir") + "\\src\\test\\resources\\config\\config.properties");
+		File configFile = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
+				+ File.separator + "resources" + File.separator + "config" + File.separator + "config.properties");
 		FileReader fileReader = null;
 		try {
 			fileReader = new FileReader(configFile);
