@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigManager {
@@ -14,12 +15,12 @@ public class ConfigManager {
 
 	// Static block will execute only once
 	static {
-		File configFile = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
-				+ File.separator + "resources" + File.separator + "config" + File.separator + "config.properties");
-		FileReader fileReader = null;
+
+		InputStream input = Thread.currentThread().getContextClassLoader()
+				.getResourceAsStream("config/config.properties");
+
 		try {
-			fileReader = new FileReader(configFile);
-			prop.load(fileReader);
+			prop.load(input);
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
