@@ -13,17 +13,16 @@ public class ConfigManager {
 
 	private static Properties prop = new Properties();
 	private static String path = "config/config.properties";
-	
+
 	// Static block will execute only once
 	static {
 
-		InputStream input = Thread.currentThread().getContextClassLoader()
-				.getResourceAsStream(path);
+		InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
 
-		if(input==null) {
+		if (input == null) {
 			throw new RuntimeException("file not found at the given path" + path);
 		}
-		
+
 		try {
 			prop.load(input);
 		} catch (FileNotFoundException e) {
