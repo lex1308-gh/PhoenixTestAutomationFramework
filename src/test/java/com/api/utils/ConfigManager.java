@@ -13,9 +13,29 @@ public class ConfigManager {
 
 	private static Properties prop = new Properties();
 	private static String path = "config/config.properties";
+	private static String myEnv;
 
 	// Static block will execute only once
 	static {
+
+		myEnv = System.getProperty("env", "qa");
+		myEnv = myEnv.toLowerCase().trim();
+
+		System.out.println("");
+		System.out.println("Running test in environment --------> " + myEnv);
+		System.out.println("");
+
+		switch (myEnv) {
+
+		case "dev" -> path = "config/config.dev.properties";
+
+		case "qa" -> path = "config/config.qa.properties";
+
+		case "uat" -> path = "config/config.uat.properties";
+
+		default -> path = "config/config.properties";
+
+		}
 
 		InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
 
@@ -25,13 +45,11 @@ public class ConfigManager {
 
 		try {
 			prop.load(input);
-		} catch (FileNotFoundException e) {
-
-			e.printStackTrace();
 		} catch (IOException e) {
-
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	public static String getProperty(String key) {
