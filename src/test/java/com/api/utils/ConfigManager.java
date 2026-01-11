@@ -1,4 +1,6 @@
-// will contain main method
+// Will NOT contain main method
+// Load property file with help of inputstream
+// Switch between different properties files
 
 package com.api.utils;
 
