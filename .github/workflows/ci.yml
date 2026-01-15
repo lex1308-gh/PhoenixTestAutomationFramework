@@ -8,9 +8,8 @@ on:
   schedule: # Set the  cron for daily midnight IST
     - cron: "30 18 * *  *" # This is UTC time 
 
-# Added workflow dispatcher for sending env params
-workflow_dispatch: 
-   inputs:
+  workflow_dispatch:
+    inputs:
      env:
         description: "Environment"
         type: choice
