@@ -5,9 +5,19 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
-
-
+  schedule: # Set the  cron for daily midnight IST
+    - cron: "30 18 * *  *" # This is UTC time 
+    
+#Parameter variable created for selection env   
+ workflow_dispatch: 
+   inputs:
+     env:
+        description: "Environment"
+        type: choice
+        options: [qa,dev,uat]
+        default: qa
+        required: true
+  
 jobs:
   test:
 
@@ -24,7 +34,7 @@ jobs:
 
         
     - name: Execute Test Automation Framework
-      run: mvn clean test -DsuiteXmlFile=testng.xml -Denv=qa
+      run: mvn clean test -DsuiteXmlFile=testng.xml -Denv="${{ github.event.inputs.env }}"
 
     # Added details from Upload a Build Artifact 
     - name: Upload a Build Artifact
