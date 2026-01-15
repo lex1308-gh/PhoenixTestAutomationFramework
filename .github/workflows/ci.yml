@@ -17,8 +17,6 @@ on:
         default: qa
         required: true
     
-       
-    
 jobs:
   test:
 
