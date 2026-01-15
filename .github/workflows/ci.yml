@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: [ "master" ]
 
+
+
 jobs:
   test:
 
@@ -19,5 +21,16 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+
+        
     - name: Execute Test Automation Framework
       run: mvn clean test -DsuiteXmlFile=testng.xml -Denv=qa
+
+    # Added details from Upload a Build Artifact 
+    - name: Upload a Build Artifact
+      if: always()                         # Create reports even if tests fail
+      uses: actions/upload-artifact@v6.0.0
+      with:
+         name: Surefire Report
+         path: target/surefire-reports/
+         retention-days: 10
