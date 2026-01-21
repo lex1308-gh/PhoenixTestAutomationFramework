@@ -1,4 +1,5 @@
-// This is Right click -->new -->ENUM created file
+// ENUM created file for constants
+
 
 package com.api.constant;
 
