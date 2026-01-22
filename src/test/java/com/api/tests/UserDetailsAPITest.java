@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.api.constant.Role;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
+import com.api.utils.SpecUtil;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -20,12 +21,9 @@ public class UserDetailsAPITest {
 	@Test
 	public void userDetailsAPITest() throws IOException {
 
-		// Token is retrieved from AuthTokenProvider utility class
-		Header authHeader = new Header("Authorization", AuthTokenProvider.getToken(Role.FD));
+	
 
-		given().baseUri(ConfigManager.getProperty("BASE_URI")).and().header(authHeader).and().accept(ContentType.JSON)
-				.log().uri().log().headers().log().body().log().method().when().get("userdetails").then().log().all()
-				.statusCode(200).and().time(Matchers.lessThan(3000L)).and()
+		given().spec(SpecUtil.requestSpecWithAuth(Role.FD)).when().get("userdetails").then().spec(SpecUtil.responseSpec()).and()
 				.body(JsonSchemaValidator
 						.matchesJsonSchemaInClasspath("response-schema/UserDetailsResponseSchema.json"))
 				.extract().response();
