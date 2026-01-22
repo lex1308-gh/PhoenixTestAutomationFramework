@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
   schedule: # Set the  cron for daily midnight IST
     - cron: "30 18 * *  *" # This is UTC time 
-    - cron: "30 17 * *  *"
+    - cron: "30 20 * *  *"
 
   workflow_dispatch:
     inputs:
