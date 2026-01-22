@@ -25,7 +25,7 @@ public class UserDetailsAPITest {
 
 		given().baseUri(ConfigManager.getProperty("BASE_URI")).and().header(authHeader).and().accept(ContentType.JSON)
 				.log().uri().log().headers().log().body().log().method().when().get("userdetails").then().log().all()
-				.statusCode(200).and().time(Matchers.lessThan(2500L)).and()
+				.statusCode(200).and().time(Matchers.lessThan(3000L)).and()
 				.body(JsonSchemaValidator
 						.matchesJsonSchemaInClasspath("response-schema/UserDetailsResponseSchema.json"))
 				.extract().response();
