@@ -10,8 +10,8 @@
 	<properties>
 		<!-- This property decides java versions for source and target
 		machines-->
-		<maven.compiler.source>14</maven.compiler.source>
-		<maven.compiler.target>14</maven.compiler.target>
+		<maven.compiler.source> 15 </maven.compiler.source>
+		<maven.compiler.target> 15 </maven.compiler.target>
 	</properties>
 
 	<!-- For Reading testng.xml file while calling from maven command -->
