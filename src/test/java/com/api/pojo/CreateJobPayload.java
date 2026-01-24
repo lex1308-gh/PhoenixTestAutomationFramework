@@ -1,5 +1,6 @@
 package com.api.pojo;
 
+
 import java.util.Arrays;
 
 public class CreateJobPayload {
