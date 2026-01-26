@@ -26,7 +26,7 @@ public class CreateJobAPITest {
 	
 		Customer customer =  new Customer("Laxman", "Teli", "8446981010", "8446981020", "testlaxman@test1.com", "testlaxman@test1.com");
 		CustomerAddress customerAddress = new CustomerAddress("A-22", "GS", "Shahunagar", "Siddivinayak Temple", "Chinchwad", "411222", "India", "MH");
-		CustomerProduct customerProduct = new CustomerProduct(DateTime.getTimeWithDaysAgo(5), "13549925195619", "13549925195619", "13549925195619", DateTime.getTimeWithDaysAgo(5), 1, 1);
+		CustomerProduct customerProduct = new CustomerProduct(DateTime.getTimeWithDaysAgo(5), "13549925191112", "13549925191112", "13549925191112", DateTime.getTimeWithDaysAgo(5), 1, 1);
 		Problems problems = new Problems(1, "Battery Issue");
 		List<Problems> problemsList =  new ArrayList<Problems>();
 		problemsList.add(problems);
@@ -39,7 +39,8 @@ public class CreateJobAPITest {
 		.then().log().all().statusCode(200)
 		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/CreateJobAPIResponseSchema.json"))
 		.body("message", Matchers.equalTo("Job created successfully. "))
-		.body("data.job_number", Matchers.startsWith("JOB_"));
+		.body("data.job_number", Matchers.startsWith("JOB_"))
+		.time(Matchers.lessThan(3000L));
 		
 		
 		
