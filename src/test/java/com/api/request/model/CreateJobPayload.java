@@ -1,4 +1,5 @@
-package com.api.pojo;
+//POJO class replaced with records
+package com.api.request.model;
 
 import java.util.Arrays;
 import java.util.List;

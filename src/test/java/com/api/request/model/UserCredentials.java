@@ -1,4 +1,6 @@
-package com.api.pojo;
+// This is typical POJO class which contains private instance variables, getters,setters,constructor and tostring method
+
+package com.api.request.model;
 
 public class UserCredentials {
 
