@@ -1,7 +1,7 @@
 // Will NOT contain main method
 // Load property file with help of inputstream
 // Switch between different properties files
-
+//
 package com.api.utils;
 
 import java.io.File;
