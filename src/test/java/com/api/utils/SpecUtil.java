@@ -16,7 +16,11 @@ public class SpecUtil {
 
 	//Utility classes should have only static methods
 	
-	//For get-delete requests - without body
+	/*
+	 * BaseURI
+	 * Content type
+	 * log details specific
+	 */
 	public static RequestSpecification requestSpec() {
 		
 		RequestSpecification requestSpecification=new RequestSpecBuilder()
@@ -34,7 +38,12 @@ public class SpecUtil {
 	
 	
 	
-	//for put-patch-post -- with body
+	/*
+	 * BaseURI
+	 * Content type
+	 * Body
+	 * log details specific
+	 */
 	public static RequestSpecification requestSpec(Object payload) {
 		
 		RequestSpecification requestSpecification=new RequestSpecBuilder()
@@ -52,6 +61,12 @@ public class SpecUtil {
 	}
 	
 	
+	/*
+	 * BaseURI
+	 * Content type
+	 * Authorization
+	 * log details specific
+	 */
     public static RequestSpecification requestSpecWithAuth(Role role ) {
 		
 		RequestSpecification requestSpecification=new RequestSpecBuilder()
@@ -68,6 +83,14 @@ public class SpecUtil {
 		return requestSpecification;
 	}
     
+    
+	/*
+	 * BaseURI
+	 * Content type
+	 * Authorization
+	 * Body
+	 * log details specific
+	 */
    public static RequestSpecification requestSpecWithAuth(Role role, Object payload ) {
 		
 		RequestSpecification requestSpecification=new RequestSpecBuilder()
@@ -86,6 +109,12 @@ public class SpecUtil {
 	}
 	
 	
+	/*
+	 * statuscode
+	 * Content type
+	 * log details all
+	 * Timelimit
+	 */
 	public static ResponseSpecification responseSpec() {
 		
 		ResponseSpecification responseSpecification= new ResponseSpecBuilder()
