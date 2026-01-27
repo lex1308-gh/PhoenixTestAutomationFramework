@@ -6,6 +6,7 @@ import static io.restassured.RestAssured.*;
 import java.io.IOException;
 
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.request.model.UserCredentials;
@@ -17,13 +18,21 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class LoginAPITest {
 
-	@Test
+	
+	private UserCredentials userCredentials;
+
+	@BeforeMethod(description = "Setting up the payload")
+	public void setup() {
+		userCredentials = new UserCredentials("iamfd", "password");
+	}
+
+	
+	
+	@Test(description = "Verify if Login API is working for FD user", groups = { "api", "regression", "smoke","sanity" })
 	public void loginAPITest() throws IOException {
 
-		UserCredentials userCredentials = new UserCredentials("iamfd", "password");
-
-		given().spec(SpecUtil.requestSpec(userCredentials)).when().post("login").then().spec(SpecUtil.responseSpec()).and().body("message", Matchers.equalTo("Success")).and()
-				.body("data.token", Matchers.notNullValue())
+		given().spec(SpecUtil.requestSpec(userCredentials)).when().post("login").then().spec(SpecUtil.responseSpec())
+				.and().body("message", Matchers.equalTo("Success")).and().body("data.token", Matchers.notNullValue())
 				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/LoginResponseSchema.json"))
 				.extract().response();
 

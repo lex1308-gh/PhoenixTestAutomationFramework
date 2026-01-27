@@ -15,7 +15,7 @@ import static io.restassured.RestAssured.*;
 
 public class MasterAPITest {
 
-	@Test
+	@Test(description = "Verify if Master API is giving correct response", groups = { "api", "smoke","regression" })
 	public void masterAPITest() {
 
 		given().spec(SpecUtil.requestSpecWithAuth(Role.FD)).when()
@@ -30,7 +30,7 @@ public class MasterAPITest {
 				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/MasterAPIResponseSchema.json"));
 	}
 
-	@Test
+	@Test(description = "Verify if Master API is giving correct response for invalid token", groups = { "api","negative", "smoke","regression" })
 	public void invlaidTokenMasterAPITest() {
 
 		given().baseUri(ConfigManager.getProperty("BASE_URI")).header("Authorization", "").contentType("").log().all()

@@ -19,12 +19,11 @@ import java.io.IOException;
 
 public class UserDetailsAPITest {
 
-	@Test
+	@Test(description = "Verify if user details API response is shown correctly", groups = { "api", "smoke","regression" })
 	public void userDetailsAPITest() throws IOException {
 
-	
-
-		given().spec(SpecUtil.requestSpecWithAuth(Role.FD)).when().get("userdetails").then().spec(SpecUtil.responseSpec()).and()
+		given().spec(SpecUtil.requestSpecWithAuth(Role.FD)).when().get("userdetails").then()
+				.spec(SpecUtil.responseSpec()).and()
 				.body(JsonSchemaValidator
 						.matchesJsonSchemaInClasspath("response-schema/UserDetailsResponseSchema.json"))
 				.extract().response();

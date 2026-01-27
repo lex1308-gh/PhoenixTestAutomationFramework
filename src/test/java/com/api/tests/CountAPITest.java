@@ -16,7 +16,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class CountAPITest {
 
-	@Test
+	@Test(description = "Verify if Count API is giving correct response", groups = { "api","smoke","regression" })
 	public void verifyCountAPIResponse() {
 
 		given().spec(SpecUtil.requestSpecWithAuth(Role.FD)).when().get("/dashboard/count").then()
@@ -30,7 +30,7 @@ public class CountAPITest {
 						Matchers.containsInAnyOrder("pending_fst_assignment", "pending_for_delivery", "created_today"));
 	}
 
-	@Test  
+	@Test(description = "Verify if Count API is giving correct response for Missing token", groups = { "api","negative", "smoke","regression" })  
 	private void countAPITest_MissingAuthToken() {
 
 		given().spec(SpecUtil.requestSpec()).when()

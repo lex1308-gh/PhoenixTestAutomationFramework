@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.constant.Model;
@@ -28,20 +29,31 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class CreateJobAPITest {
 
-	@Test  
-	public void createJobAPITest() {
+	private CreateJobPayload createJobPayload;
 	
+	@BeforeMethod(description = "Creating CreateJobAPI test payload")
+	public void setup() {
+		
 		Customer customer =  new Customer("Laxman", "Teli", "8446981010", "", "testlaxman@test1.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("A-22", "GS", "Shahunagar", "Siddivinayak Temple", "Chinchwad", "411222", "India", "MH");
-		CustomerProduct customerProduct = new CustomerProduct(DateTime.getTimeWithDaysAgo(5), "15549925191111", "15549925191111", "15549925191111", DateTime.getTimeWithDaysAgo(5), Product.NEXUS_2.getCode(), Model.Nexus_2_blue.getCode());
+		CustomerProduct customerProduct = new CustomerProduct(DateTime.getTimeWithDaysAgo(5), "15549925191112", "15549925191112", "15549925191112", DateTime.getTimeWithDaysAgo(5), Product.NEXUS_2.getCode(), Model.Nexus_2_blue.getCode());
 		
 		
 		Problems problems = new Problems(1, "Battery Issue");
 		List<Problems> problemsList =  new ArrayList<Problems>();
 		problemsList.add(problems);
 		
-		CreateJobPayload createJobPayload = new CreateJobPayload(Service_Location.SERVICE_LOCATION_A.getCode(), Platform.FRONT_DESK.getCode(), Warranty_Status.IN_WARRENTY.getCode(), Oem.GOOGLE.getCode(), customer, customerAddress, customerProduct, problemsList);
+		createJobPayload = new CreateJobPayload(Service_Location.SERVICE_LOCATION_A.getCode(), Platform.FRONT_DESK.getCode(), Warranty_Status.IN_WARRENTY.getCode(), Oem.GOOGLE.getCode(), customer, customerAddress, customerProduct, problemsList);
 		
+		
+	}
+	
+	
+	
+	@Test(description = "Verify if CreateJob API is giving correct response ", groups = { "api", "smoke","regression" })  
+	public void createJobAPITest() {
+	
+				
 		given()
 		.spec(SpecUtil.requestSpecWithAuth(Role.FD, createJobPayload))
 		.when().post("/job/create")
